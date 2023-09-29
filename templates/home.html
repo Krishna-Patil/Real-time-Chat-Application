@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp</title>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <p>Hi {{ user.email }}!</p>
+    <p><a href="{% url 'account_logout' %}">Log Out</a></p> 
+    <h3>Online Users</h3>
+    <div id="users" style="overflow:auto; height:400px;">
+        {% for usr in users %}
+        {% if user.id != usr.id %}
+        <a href="{% url 'chat' id=usr.id %}">{{usr.username}}</a><br>
+        {%endif%}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>You are not logged in</p>
+    <p><a href="{% url 'account_login' %}">Log In</a> | <a href="{% url 'account_signup' %}">Sign Up</a></p>
+    {% endif %}
+</body>
+
+</html>
