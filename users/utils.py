@@ -17,7 +17,7 @@ def is_online(username_or_id):
             return True
         return False
     except Exception as e:
-        return e 
+        print(e)
 
 
 def get_user(token):
@@ -26,8 +26,7 @@ def get_user(token):
     """
     try:
         access_token = AccessToken(token)
-        user = CustomUser.objects.get(id=access_token['user_id'])
+        user = CustomUser.objects.get(id=access_token["user_id"])
         return user
     except TokenError:
         return TokenError
-
